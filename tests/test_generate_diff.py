@@ -3,15 +3,15 @@ from pathlib import Path
 from gendiff import generate_diff
 
 
-def get_path(filename):
+def get_path(filename) -> Path:
     return Path(__file__).parent / "test_data" / filename
 
 
-def read_file(filename):
+def read_file(filename: str) -> str:
     return get_path(filename).read_text()
 
 
-def test_generate_diff():
+def test_generate_diff() -> None:
     path1 = get_path("file1.json")
     path2 = get_path("file2.json")
     expected = read_file("expected_flat.txt")
