@@ -3,7 +3,7 @@ from pathlib import Path
 from gendiff import generate_diff
 
 
-def get_path(filename) -> Path:
+def get_path(filename: str) -> Path:
     return Path(__file__).parent / "test_data" / filename
 
 
@@ -11,9 +11,19 @@ def read_file(filename: str) -> str:
     return get_path(filename).read_text()
 
 
-def test_generate_diff() -> None:
+def test_generate_diff_json() -> None:
     path1 = get_path("file1.json")
     path2 = get_path("file2.json")
+    expected = read_file("expected_flat.txt")
+
+    actual = generate_diff(path1, path2)
+
+    assert actual == expected
+
+
+def test_generate_diff_yaml() -> None:
+    path1 = get_path("file1.yml")
+    path2 = get_path("file2.yml")
     expected = read_file("expected_flat.txt")
 
     actual = generate_diff(path1, path2)
