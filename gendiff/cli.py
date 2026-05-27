@@ -19,6 +19,7 @@ def parse_args() -> Namespace:
         '-f',
         '--format',
         metavar='FORMAT',
+        default='stylish',
         help='set format of output',
     )
     return parser.parse_args()

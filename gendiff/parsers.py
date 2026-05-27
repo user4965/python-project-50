@@ -5,7 +5,7 @@ from typing import Any
 import yaml
 
 
-def parse_file(path: str | Path) -> Any:
+def parse_file(path: str | Path) -> dict[str, Any]:
     path = Path(path)
     with open(path) as file:
         if path.suffix == '.json':

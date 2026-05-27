@@ -1,30 +1,18 @@
 from pathlib import Path
-from typing import Any
 
+from gendiff.diff_builder import build_diff
+from gendiff.formatters.stylish import format_stylish
 from gendiff.parsers import parse_file
 
 
-def format_value(value: Any) -> str:
-    if isinstance(value, bool):
-        return str(value).lower()
-    return str(value)
-
-
-def generate_diff(file_path1: str | Path, file_path2: str | Path) -> str:
+def generate_diff(
+    file_path1: str | Path,
+    file_path2: str | Path,
+    format_name: str = 'stylish'
+) -> str:
     dict1 = parse_file(file_path1)
     dict2 = parse_file(file_path2)
-    sorted_keys = sorted(dict1.keys() | dict2.keys())
-    result: list[str] = []
-
-    for key in sorted_keys:
-        if key in dict1 and key not in dict2:
-            result.append(f" - {key}: {format_value(dict1[key])}")
-        elif key in dict2 and key not in dict1:
-            result.append(f" + {key}: {format_value(dict2[key])}")
-        elif key in dict1 and key in dict2 and dict1[key] != dict2[key]:
-            result.append(f" - {key}: {format_value(dict1[key])}")
-            result.append(f" + {key}: {format_value(dict2[key])}")
-        else:
-            result.append(f"   {key}: {format_value(dict1[key])}")
-    joined_str = '\n'.join(result)
-    return f"{{\n{joined_str}\n}}"
+    diff = build_diff(dict1, dict2)
+    if format_name == 'stylish':
+        return format_stylish(diff)
+    raise ValueError('Unknown format')
