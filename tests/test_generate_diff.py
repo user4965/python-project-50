@@ -21,22 +21,22 @@ def test_generate_diff_json() -> None:
     assert actual == expected
 
 
-def test_generate_diff_nested_json() -> None:
-    path1 = get_path("nested_file1.json")
-    path2 = get_path("nested_file2.json")
-    expected = read_file("expected_nested.txt")
-
-    actual = generate_diff(path1, path2, "stylish")
-
-    assert actual == expected
-
-
 def test_generate_diff_yaml() -> None:
     path1 = get_path("file1.yml")
     path2 = get_path("file2.yml")
     expected = read_file("expected_flat.txt")
 
     actual = generate_diff(path1, path2)
+
+    assert actual == expected
+
+
+def test_generate_diff_nested_json() -> None:
+    path1 = get_path("nested_file1.json")
+    path2 = get_path("nested_file2.json")
+    expected = read_file("expected_nested.txt")
+
+    actual = generate_diff(path1, path2, "stylish")
 
     assert actual == expected
 
@@ -62,8 +62,8 @@ def test_generate_diff_plain_json() -> None:
 
 
 def test_generate_diff_plain_yaml() -> None:
-    path1 = get_path("nested_file1.yaml")
-    path2 = get_path("nested_file2.yaml")
+    path1 = get_path("nested_file1.yml")
+    path2 = get_path("nested_file2.yml")
     expected = read_file("expected_plain.txt")
 
     actual = generate_diff(path1, path2, "plain")
@@ -71,7 +71,7 @@ def test_generate_diff_plain_yaml() -> None:
     assert actual == expected
 
 
-def test_generate_diff_json_format() -> None:
+def test_generate_diff_json_format_json() -> None:
     path1 = get_path("nested_file1.json")
     path2 = get_path("nested_file2.json")
     expected = read_file("expected_json.txt")
@@ -82,9 +82,10 @@ def test_generate_diff_json_format() -> None:
 
 
 def test_generate_diff_json_format_yaml() -> None:
-    path1 = get_path("nested_file1.yaml")
-    path2 = get_path("nested_file2.yaml")
+    path1 = get_path("nested_file1.yml")
+    path2 = get_path("nested_file2.yml")
     expected = read_file("expected_json.txt")
 
     actual = generate_diff(path1, path2, "json")
+
     assert actual == expected

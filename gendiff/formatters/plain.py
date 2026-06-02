@@ -29,7 +29,7 @@ def format_plain(diff: list[dict[str, Any]]) -> str:
             if status == "removed":
                 key = node["key"]
                 current_path = path + [key]
-                property_name = '.'.join(current_path)
+                property_name = ".".join(current_path)
                 lines.append(
                     f"Property '{property_name}' was removed"
                 )

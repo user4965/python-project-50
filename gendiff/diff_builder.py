@@ -16,9 +16,21 @@ def build_diff(
 
     for key in sorted_keys:
         if key in dict1 and key not in dict2:
-            result.append({'key': key, 'status': REMOVED, 'value': dict1[key]})
+            result.append(
+                {
+                    'key': key,
+                    'status': REMOVED,
+                    'value': dict1[key]
+                }
+            )
         elif key in dict2 and key not in dict1:
-            result.append({'key': key, 'status': ADDED, 'value': dict2[key]})
+            result.append(
+                {
+                    'key': key,
+                    'status': ADDED,
+                    'value': dict2[key]
+                }
+            )
         elif (
             key in dict1
             and key in dict2
@@ -26,17 +38,26 @@ def build_diff(
             and isinstance(dict2[key], dict)
         ):
             children = build_diff(dict1[key], dict2[key])
-            result.append({'key': key, 'status': NESTED, 'children': children})
+            result.append(
+                {'key': key,
+                 'status': NESTED,
+                 'children': children
+                 }
+            )
         elif key in dict1 and key in dict2 and dict1[key] != dict2[key]:
             result.append(
                 {'key': key,
                  'status': CHANGED,
                  'old_value': dict1[key],
-                 'new_value': dict2[key]})
+                 'new_value': dict2[key]
+                 }
+            )
         else:
             result.append(
                 {'key': key,
                  'status': UNCHANGED,
-                 'value': dict1[key]})
+                 'value': dict1[key]
+                 }
+            )
 
     return result

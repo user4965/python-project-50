@@ -19,7 +19,7 @@ def format_value(value: Any, depth: int) -> str:
     for key, val in value.items():
         formatted_value = format_value(val, deep_indent_size)
         lines.append(f'{deep_indent}{key}: {formatted_value}')
-    result = itertools.chain(["{"], lines, [current_indent + "}"])
+    result = itertools.chain(['{'], lines, [current_indent + '}'])
     return '\n'.join(result)
 
 
@@ -37,32 +37,32 @@ def format_stylish(diff: list[dict[str, Any]]) -> str:
             if status == 'removed':
                 key = node['key']
                 value = format_value(node['value'], deep_indent_size)
-                lines.append(f"{sign_indent}- {key}: {value}")
+                lines.append(f'{sign_indent}- {key}: {value}')
 
             elif status == 'added':
                 key = node['key']
                 value = format_value(node['value'], deep_indent_size)
-                lines.append(f"{sign_indent}+ {key}: {value}")
+                lines.append(f'{sign_indent}+ {key}: {value}')
 
             elif status == 'changed':
                 key = node['key']
                 old_value = format_value(node['old_value'], deep_indent_size)
                 new_value = format_value(node['new_value'], deep_indent_size)
-                lines.append(f"{sign_indent}- {key}: {old_value}")
-                lines.append(f"{sign_indent}+ {key}: {new_value}")
+                lines.append(f'{sign_indent}- {key}: {old_value}')
+                lines.append(f'{sign_indent}+ {key}: {new_value}')
 
             elif status == 'unchanged':
                 key = node['key']
                 value = format_value(node['value'], deep_indent_size)
-                lines.append(f"{deep_indent}{key}: {value}")
+                lines.append(f'{deep_indent}{key}: {value}')
 
             elif status == 'nested':
                 key = node['key']
                 children = node['children']
                 formatted_children = iter_(children, deep_indent_size)
-                lines.append(f"{deep_indent}{key}: {formatted_children}")
+                lines.append(f'{deep_indent}{key}: {formatted_children}')
 
-        result = itertools.chain(["{"], lines, [current_indent + "}"])
+        result = itertools.chain(['{'], lines, [current_indent + '}'])
         return '\n'.join(result)
 
     return iter_(diff, 0)
