@@ -24,7 +24,10 @@ def format_value(value: Any, depth: int) -> str:
 
 
 def format_stylish(diff: list[dict[str, Any]]) -> str:
-    def iter_(nodes: list[dict[str, Any]], depth: int) -> str:
+    def iter_(
+        nodes: list[dict[str, Any]],
+        depth: int
+    ) -> str:
         current_indent = ' ' * depth
         deep_indent_size = depth + 4
         deep_indent = ' ' * deep_indent_size

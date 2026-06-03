@@ -39,25 +39,32 @@ def build_diff(
         ):
             children = build_diff(dict1[key], dict2[key])
             result.append(
-                {'key': key,
-                 'status': NESTED,
-                 'children': children
-                 }
+                {
+                    'key': key,
+                    'status': NESTED,
+                    'children': children
+                }
             )
-        elif key in dict1 and key in dict2 and dict1[key] != dict2[key]:
+        elif (
+            key in dict1
+            and key in dict2
+            and dict1[key] != dict2[key]
+        ):
             result.append(
-                {'key': key,
-                 'status': CHANGED,
-                 'old_value': dict1[key],
-                 'new_value': dict2[key]
-                 }
+                {
+                    'key': key,
+                    'status': CHANGED,
+                    'old_value': dict1[key],
+                    'new_value': dict2[key]
+                }
             )
         else:
             result.append(
-                {'key': key,
-                 'status': UNCHANGED,
-                 'value': dict1[key]
-                 }
+                {
+                    'key': key,
+                    'status': UNCHANGED,
+                    'value': dict1[key]
+                }
             )
 
     return result
