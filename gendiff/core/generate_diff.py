@@ -1,10 +1,10 @@
 from pathlib import Path
 
-from gendiff.diff_builder import build_diff
+from gendiff.core.diff_builder import build_diff
+from gendiff.core.parsers import parse_file
 from gendiff.formatters.json import format_json
 from gendiff.formatters.plain import format_plain
 from gendiff.formatters.stylish import format_stylish
-from gendiff.parsers import parse_file
 
 
 def generate_diff(

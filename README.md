@@ -1,6 +1,5 @@
 ### Hexlet tests and linter status:
 [![Python CI](https://github.com/user4965/python-project-50/actions/workflows/pyci.yml/badge.svg)](https://github.com/user4965/python-project-50/actions/workflows/pyci.yml)
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=user4965_python-project-50&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=user4965_python-project-50)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=user4965_python-project-50&metric=coverage)](https://sonarcloud.io/summary/new_code?id=user4965_python-project-50)
 
 ## Gendiff
@@ -20,10 +19,18 @@ Supported output formats:
 
 ## Usage
 
-```bash
-gendiff file1.json file2.json
-gendiff --format plain file1.json file2.json
-gendiff --format json file1.json file2.json
+Default format is `stylish`:
+
+```
+gendiff filepath1.json filepath2.json
+```
+Plain format:
+```
+gendiff --format plain filepath1.json filepath2.json
+```
+JSON format:
+```
+gendiff --format json filepath1.json filepath2.json
 ```
 
 ### Demo
